@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\lenovo\\Documents\\Computaci\u00F3nGrafica\\Project1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C46DD537-273F-44D2-9E79-BD71A0F8F426}|Project1\\Project1.vcxproj|C:\\Users\\lenovo\\Documents\\Computaci\u00F3nGrafica\\Project1\\Project1\\Main_Dibujo2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C46DD537-273F-44D2-9E79-BD71A0F8F426}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Main_Dibujo2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Main_Dibujo2D.cpp",
+              "DocumentMoniker": "C:\\Users\\lenovo\\Documents\\Computaci\u00F3nGrafica\\Project1\\Project1\\Main_Dibujo2D.cpp",
+              "RelativeDocumentMoniker": "Project1\\Main_Dibujo2D.cpp",
+              "ToolTip": "C:\\Users\\lenovo\\Documents\\Computaci\u00F3nGrafica\\Project1\\Project1\\Main_Dibujo2D.cpp",
+              "RelativeToolTip": "Project1\\Main_Dibujo2D.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-25T04:31:06.124Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
