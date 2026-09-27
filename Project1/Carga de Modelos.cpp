@@ -1,6 +1,6 @@
-//Previo 6
+//Práctica 6
 //Santiago Estrada Samantha
-//Fecha: 14/07/2026
+//Fecha: 26/09/2026
 //Grupo 14
 
 // Std. Includes
@@ -59,7 +59,7 @@ int main( )
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE );
     
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Previo6_Samantha_Santiago", nullptr, nullptr );
+    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Practica6_Samantha_Santiago", nullptr, nullptr );
     
     if ( nullptr == window )
     {
@@ -100,7 +100,13 @@ int main( )
     
     // Load models
     Model dog((char*)"Models/RedDog.obj");
-    Model Banca((char*)"Models/Bench_LowRes.obj");
+
+    Model arena((char*)"C:\\Users\\lenovo\Documents\\3ds Max 2027\\export/piso.obj");
+    Model palma((char*)"C:\\Users\\lenovo\\Documents\\3ds Max 2027\\export/palmera.obj");
+    Model piramide((char*)"C:\\Users\\lenovo\\Documents\\3ds Max 2027\\export/piramide.obj");
+    Model caballo((char*)"C:\\Users\\lenovo\\Documents\\3ds Max 2027\\export/caballo.obj");
+    Model sombrilla((char*)"C:\\Users\\lenovo\\Documents\\3ds Max 2027\\export/sombrilla.obj");
+
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
   
@@ -131,11 +137,28 @@ int main( )
         glm::mat4 model(1);
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         dog.Draw(shader);
-      
 
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+
+        model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+        model = glm::translate(model, glm::vec3(0.0f, -6.0f, 0.0f));
+        model = glm::rotate(model, 0.5f, glm::vec3(0.0f, -5.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        Banca.Draw(shader);
+        arena.Draw(shader);
+
+        
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        palma.Draw(shader);
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        sombrilla.Draw(shader);
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        caballo.Draw(shader);
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        piramide.Draw(shader);
+
+        
 
         // Swap the buffers
         glfwSwapBuffers( window );
