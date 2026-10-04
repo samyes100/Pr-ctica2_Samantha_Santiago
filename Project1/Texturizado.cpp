@@ -1,6 +1,6 @@
-//Previo 7
+//Práctica 7
 //Santiago Estrada Samantha
-//Fecha de entrega: 28/09/2026
+//Fecha de entrega: 03/10/2026
 //320213537
 
 #include <iostream>
@@ -61,7 +61,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Previo7_SamanthaSantiago", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Practica7_SamanthaSantiago", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -105,18 +105,51 @@ int main()
 	GLfloat vertices[] =
 	{
 		// Positions            // Colors              // Texture Coords
-		-0.5f, -0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,0.0f,
-		0.5f, -0.5f, 0.0f,	   1.0f, 1.0f,1.0f,		1.0f,0.0f,
-		0.5f,  0.5f, 0.0f,     1.0f, 1.0f,1.0f,	    1.0f,1.0f,
-		-0.5f,  0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,1.0f,
+	//Cara frontal
+	-0.5f, -0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.365f, 0.48f, 
+	 0.5f, -0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.635f, 0.48f,
+	 0.5f,  0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.635f, 0.70f, 
+	-0.5f,  0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.365f, 0.70f, 
 
-		
+	//Cara trasera
+	 0.5f, -0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.365f, 0.018f, 
+	-0.5f, -0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.635f, 0.018f, 
+	-0.5f,  0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.635f, 0.24f, 
+	 0.5f,  0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.365f, 0.24f, 
+
+	 //Cara izquierda
+	 -0.5f, -0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.1f, 0.48f, 
+	 -0.5f, -0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.35f, 0.48f, 
+	 -0.5f,  0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.35f, 0.7f, 
+	 -0.5f,  0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.1f, 0.7f, 
+
+	 //Cara derecha
+	  0.5f, -0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.65f, 0.48f, 
+	  0.5f, -0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.92f, 0.48f,
+	  0.5f,  0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.92f, 0.7f, 
+	  0.5f,  0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.65f, 0.7f, 
+
+	  //Cara superior
+	  -0.5f,  0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.365f, 0.72f, 
+	   0.5f,  0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.635f, 0.72f, 
+	   0.5f,  0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.635f, 0.93f, 
+	  -0.5f,  0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.365f, 0.93f, 
+
+	  //Cara inferior
+	  -0.5f, -0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.365f, 0.25f, 
+	   0.5f, -0.5f, -0.5f,     1.0f, 1.0f, 1.0f,    0.635f, 0.25f, 
+	   0.5f, -0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.635f, 0.47f, 
+	  -0.5f, -0.5f,  0.5f,     1.0f, 1.0f, 1.0f,    0.365f, 0.47f  
 	};
 
 	GLuint indices[] =
 	{  // Note that we start from 0!
-		0,1,3,
-		1,2,3
+		0,  1,  2,   2,  3,  0,  // Frontal  (Vértices 0 a 3)
+	 4,  5,  6,   6,  7,  4,  // Trasera  (Vértices 4 a 7)
+	 8,  9, 10,  10, 11,  8,  // Derecha  (Vértices 8 a 11)
+	12, 13, 14,  14, 15, 12,  // Izquierda(Vértices 12 a 15)
+	16, 17, 18,  18, 19, 16,  // Superior (Vértices 16 a 19)
+	20, 21, 22,  22, 23, 20
 	
 	};
 
@@ -157,7 +190,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	// Diffuse map
-	image = stbi_load("images/transparent-photo-frame-texture-3d-model-aqmifcapnwr_Material_01_BaseColor.png", &textureWidth, &textureHeight, &nrChannels,0);
+	image = stbi_load("images/descargar.jpg", &textureWidth, &textureHeight, &nrChannels,0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
 	
 	if (image)
@@ -215,7 +248,7 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		// Draw the light object (using light's vertex attributes)
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
 		// Swap the screen buffers
