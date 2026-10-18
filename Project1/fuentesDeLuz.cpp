@@ -1,6 +1,6 @@
-//Previo 9
+//Práctica 9
 //Samantha Santiago Estrada
-//Fecha de entrega: 12/10/2026
+//Fecha de entrega: 17/10/2026
 //320213537
 
 #include <iostream>
@@ -121,7 +121,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Previo9_SantiagoEstrada", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Practica9_SantiagoEstrada", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -160,7 +160,17 @@ int main()
 	Shader lampShader("Shader/lamp.vs", "Shader/lamp.frag");
 	
 	Model Dog((char*)"Models/RedDog.obj");
-	Model Piso((char*)"Models/piso.obj");
+	Model arena((char*)"Models/arena.obj");
+	Model piramide((char*)"Models/piramide.obj");
+	Model palma((char*)"Models/palmera.obj");
+	Model caballo((char*)"Models/caballo.obj");
+	Model torch((char*)"Models/torch.obj");
+	//Model alien((char*)"Models/alien.obj");
+	Model ufo((char*)"Models/UFO.obj");
+	Model fogata((char*)"Models/Fogata.obj");
+	Model luna((char*)"Models/Luna.obj");
+	
+
 
 
 
@@ -222,7 +232,7 @@ int main()
 
 		// Directional light
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.direction"), -0.2f, -1.0f, -0.3f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"),0.5f,0.5f,0.5f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"),0.2f,0.2f,0.7f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.diffuse"), 0.5f, 0.5f, 0.5f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.specular"),0.3f, 0.3f, 0.3f);
 
@@ -308,9 +318,31 @@ int main()
         view = camera.GetViewMatrix();	
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		Piso.Draw(lightingShader);
+		arena.Draw(lightingShader);
 
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		piramide.Draw(lightingShader);
 
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		caballo.Draw(lightingShader);
+
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		palma.Draw(lightingShader);
+
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		luna.Draw(lightingShader);
+
+		//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		//alien.Draw(lightingShader);
+
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		ufo.Draw(lightingShader);
+
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		fogata.Draw(lightingShader);
+
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		torch.Draw(lightingShader);
 	
 		model = glm::mat4(1);
 		//glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
