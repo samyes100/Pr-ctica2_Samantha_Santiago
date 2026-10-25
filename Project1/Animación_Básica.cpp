@@ -1,6 +1,6 @@
-//Previo 10
+//Práctica 10
 // Santiago Estrada Samantha
-//Fecha: 19/10/2026
+//Fecha: 24/10/2026
 //320213537
 
 #include <iostream>
@@ -108,6 +108,15 @@ glm::vec3 Light1 = glm::vec3(0);
 float rotBall = 0;
 bool AnimBall = false;
 
+float rootDog = 0;
+bool animDog = 0; 
+float mover2 = 0.0f;
+float altura2 = true;
+float dogOrbit = 0.0f;
+float ballOrbit = 0.0f;
+float radio = 2.0f;
+bool salto = false; 
+
 bool AnimBall2 = false;
 bool altura = true;
 float nariz = 0.0f;
@@ -130,7 +139,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Previo10_Samantha_Santiago", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Practica10_Samantha_Santiago", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -296,16 +305,26 @@ int main()
 		Piso.Draw(lightingShader);
 
 		model = glm::mat4(1);
+		glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 0);
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 1);
+		float perroX = radio * cos(glm::radians(dogOrbit));
+		float perroZ = radio * sin(glm::radians(dogOrbit));
+		model = glm::translate(model, glm::vec3(perroX, mover2, perroZ)); // Traslación en círculo y salto en Ymodel = glm::rotate(model, glm::radians(rootDog), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		Dog.Draw(lightingShader);
+		glDisable(GL_BLEND);  //Desactiva el canal alfa 
+		glBindVertexArray(0);
 
 		model = glm::mat4(1);
 		glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 1);
-		model = glm::translate(model, glm::vec3(0.0f, mover, 0.0f));
+		float ballX = (radio - 0.5f) * cos(glm::radians(ballOrbit));
+		float ballZ = (radio - 0.5f) * sin(glm::radians(ballOrbit));
+		model = glm::translate(model, glm::vec3(ballX, mover, ballZ));
 		model = glm::rotate(model, glm::radians(rotBall), glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	    Ball.Draw(lightingShader); 
@@ -457,22 +476,24 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 		AnimBall2 = !AnimBall2;
 
 	}
+	if (keys[GLFW_KEY_M])
+	{
+		animDog = !animDog;
+
+	}
 }
 void Animation() {
 	if (AnimBall)
 	{
-		rotBall += 0.2f;
-		printf("%f", rotBall);
-	}
-	else
-	{
-		//rotBall = 0.0f;
-	}
-	if(AnimBall2)
-	{
+		rotBall += 0.04f;
+		ballOrbit += 0.08f;
+		//printf("%f", rotBall);
+		if (ballOrbit > 360.0f) {
+			ballOrbit -= 360.0f;
+		}
 		if (altura)
 		{
-			mover += 0.01f;
+			mover += 0.0009f;
 			if (mover >= 1.0f)
 			{
 				altura = false;
@@ -480,7 +501,63 @@ void Animation() {
 		}
 		else
 		{
-			mover -= 0.01f;
+			mover -= 0.0009f;
+			if (mover <= 0.0f)
+			{
+				altura = true;
+			}
+		}
+	}
+	if (animDog)
+	{
+		dogOrbit -= 0.06f;
+		if (dogOrbit < 0.0f) {
+			dogOrbit += 360.0f;
+		}
+		rootDog = dogOrbit;
+		float distanciaCruce = abs(dogOrbit - ballOrbit);
+
+		if ((distanciaCruce < 0.5f || distanciaCruce > 359.5f) && mover2 <= 0.0f && !salto)
+		{
+			salto = true;
+			altura2 = true; 
+		}
+
+		if (salto)
+		{
+			if (altura2)
+			{
+				mover2 += 0.005f; // Sube
+				if (mover2 >= 0.8f)
+				{
+					altura2 = false; // Llega arriba, ahora baja
+				}
+			}
+			else
+			{
+				mover2 -= 0.005f; // Baja
+				if (mover2 <= 0.0f)
+				{
+					mover2 = 0.0f;
+					altura2 = true;
+					salto = false; // ¡Termina el salto! El perro vuelve a caminar normal hasta el siguiente cruce
+				}
+			}
+		}
+	}
+	if(AnimBall2)
+	{
+		if (altura)
+		{
+			mover += 0.002f;
+			if (mover >= 1.0f)
+			{
+				altura = false;
+			}
+		}
+		else
+		{
+			mover -= 0.002f;
 			if (mover <= 0.0f)
 			{
 				altura = true;
