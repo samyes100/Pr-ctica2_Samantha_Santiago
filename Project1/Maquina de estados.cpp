@@ -1,4 +1,4 @@
-//Previo 11
+//Practica 11
 //Samantha Santiago Estrada
 //fecha: 26/10/2026
 //320213537
@@ -117,8 +117,14 @@ float tail = 0.0f;
 glm::vec3 dogPos (0.0f,0.0f,0.0f);
 float dogRot = 0.0f;
 bool step = false;
-
-
+int dogAnim2 = 0;
+int dogAnim3 = 0;
+int dogAnim4 = 0;
+int dogAnim5 = 0;
+int dogAnim6 = 0;
+int dogAnim7 = 0;
+int dogAnim8 = 0;
+int dogAnim9 = 0;
 
 // Deltatime
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
@@ -136,7 +142,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Previo11_Samantha_Santiago", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Practica11_Samantha_Santiago", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -509,6 +515,26 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 		dogAnim = 1; 
 
 	}
+	if (keys[GLFW_KEY_M])
+	{
+		dogAnim2 = 1;
+
+	}
+	if (keys[GLFW_KEY_H])
+	{
+		dogAnim3 = 1;
+
+	}
+	if (keys[GLFW_KEY_J])
+	{
+		dogAnim4 = 1;
+
+	}
+	if (keys[GLFW_KEY_K])
+	{
+		dogAnim5 = 1;
+
+	}
 	
 }
 void Animation() {
@@ -518,13 +544,13 @@ void Animation() {
 		//printf("%f", rotBall);
 	}
 
-	if (AnimDog)
-	{
-		rotDog -= 0.6f;
-		//printf("%f", rotBall);
-	}
-	if (dogPos.z <= 2.2) {
-		if (dogAnim == 1) {
+	//if (AnimDog)
+	//{
+	//	rotDog -= 0.6f;
+	//	printf("%f", rotBall);
+	//}
+	if (dogAnim == 1) {
+		if (dogPos.z <= 1.5) {
 			if (!step)
 			{
 				FLegs += 0.3f;
@@ -544,15 +570,280 @@ void Animation() {
 					step = false;
 			}
 
+
+			dogPos.z += 0.001;
 		}
+		else {
+			dogAnim = 0;
+			dogPos.z = 1.5f;
+			dogAnim2 = 1; 
+		}
+	}
+
+	//1er giro
+	if (dogAnim2 == 1) {
+		if (dogRot >= -90.0f) {
+
+			dogRot -= 0.015f;
+			if (!step)
+			{
+				FLegs += 0.3f;
+				RLegs -= 0.3f;
+				head += 0.06f;
+				tail += 0.03f;
+				if (FLegs >= 15.0f)
+					step = true;
+			}
+			else
+			{
+				FLegs -= 0.3f;
+				RLegs += 0.3f;
+				head -= 0.06f;
+				tail -= 0.03f;
+				if (FLegs <= -15.0f)
+					step = false;
+			}
+		
 		dogPos.z += 0.0001;
+		}
+		else {
+			dogAnim2 = 0;
+			dogPos.z = 2.1f;
+			dogAnim3 = 1; 
+		}
+
 	}
-	else {
-		dogAnim = 0; 
+
+	//Recorrido en x
+	if (dogAnim3 == 1) {
+		if (dogPos.x >= -1.5) {
+			if (!step)
+			{
+				FLegs += 0.3f;
+				RLegs -= 0.3f;
+				head += 0.03f;
+				tail += 0.03f;
+				if (FLegs >= 15.0f)
+					step = true;
+			}
+			else
+			{
+				FLegs -= 0.3f;
+				RLegs += 0.3f;
+				head -= 0.03f;
+				tail -= 0.03f;
+				if (FLegs <= -15.0f)
+					step = false;
+			}
+
+
+			dogPos.x -= 0.001;
+		}
+		else {
+			dogAnim3 = 0;
+			dogPos.x = -1.5f;
+			dogAnim4 = 1;
+		}
+
 	}
-	
-	
+
+	//2do giro
+	if (dogAnim4 == 1) {
+		if (dogRot >= -180.0f) {
+
+			dogRot -= 0.015f;
+			if (!step)
+			{
+				FLegs += 0.3f;
+				RLegs -= 0.3f;
+				head += 0.06f;
+				tail += 0.03f;
+				if (FLegs >= 15.0f)
+					step = true;
+			}
+			else
+			{
+				FLegs -= 0.3f;
+				RLegs += 0.3f;
+				head -= 0.06f;
+				tail -= 0.03f;
+				if (FLegs <= -15.0f)
+					step = false;
+			}
+
+			dogPos.x -= 0.0001;
+		}
+		else {
+			dogAnim4 = 0;
+			dogPos.x = -2.1f;
+			dogAnim5 = 1; 
+		}
+	}
+
+	//Recorrido en -z
+	if (dogAnim5 == 1) {
+		if (dogPos.z >= -1.5) {
+			if (!step)
+			{
+				FLegs += 0.3f;
+				RLegs -= 0.3f;
+				head += 0.03f;
+				tail += 0.03f;
+				if (FLegs >= 15.0f)
+					step = true;
+			}
+			else
+			{
+				FLegs -= 0.3f;
+				RLegs += 0.3f;
+				head -= 0.03f;
+				tail -= 0.03f;
+				if (FLegs <= -15.0f)
+					step = false;
+			}
+
+
+			dogPos.z -= 0.001;
+		}
+		else {
+			dogAnim5 = 0;
+			dogPos.z = -1.5f;
+			dogAnim6 = 1;
+		}
+	}
+
+	//3er giro
+	if (dogAnim6 == 1) {
+		if (dogRot >= -270.0f) {
+
+			dogRot -= 0.015f;
+			if (!step)
+			{
+				FLegs += 0.3f;
+				RLegs -= 0.3f;
+				head += 0.06f;
+				tail += 0.03f;
+				if (FLegs >= 15.0f)
+					step = true;
+			}
+			else
+			{
+				FLegs -= 0.3f;
+				RLegs += 0.3f;
+				head -= 0.06f;
+				tail -= 0.03f;
+				if (FLegs <= -15.0f)
+					step = false;
+			}
+
+			dogPos.z -= 0.0001;
+		}
+		else {
+			dogAnim6 = 0;
+			dogPos.z = -2.1f;
+			dogAnim7 = 1; 
+		}
+	}
+
+	//Segundo recorrido en x
+	if (dogAnim7 == 1) {
+		if (dogPos.x <= 1.5) {
+			if (!step)
+			{
+				FLegs += 0.3f;
+				RLegs -= 0.3f;
+				head += 0.03f;
+				tail += 0.03f;
+				if (FLegs >= 15.0f)
+					step = true;
+			}
+			else
+			{
+				FLegs -= 0.3f;
+				RLegs += 0.3f;
+				head -= 0.03f;
+				tail -= 0.03f;
+				if (FLegs <= -15.0f)
+					step = false;
+			}
+
+
+			dogPos.x += 0.001;
+		}
+		else {
+			dogAnim7 = 0;
+			dogPos.x = 1.5f;
+			dogAnim8 = 1;
+		}
+	}
+
+	//4to giro
+	if (dogAnim8 == 1) {
+		if (dogRot >= -360.0f) {
+
+			dogRot -= 0.015f;
+			if (!step)
+			{
+				FLegs += 0.3f;
+				RLegs -= 0.3f;
+				head += 0.06f;
+				tail += 0.03f;
+				if (FLegs >= 15.0f)
+					step = true;
+			}
+			else
+			{
+				FLegs -= 0.3f;
+				RLegs += 0.3f;
+				head -= 0.06f;
+				tail -= 0.03f;
+				if (FLegs <= -15.0f)
+					step = false;
+			}
+
+			dogPos.x += 0.0001;
+		}
+		else {
+			dogAnim8 = 0;
+			dogPos.x = 2.1f;
+			dogAnim9 = 1;
+		}
+	}
+	//Recorrido en diagonal
+	if (dogAnim9 == 1) {
+		if (dogPos.z <= 0.0f and dogPos.x>=0.0f) {
+			if (!step)
+			{
+				FLegs += 0.3f;
+				RLegs -= 0.3f;
+				head += 0.03f;
+				tail += 0.03f;
+				if (FLegs >= 15.0f)
+					step = true;
+			}
+			else
+			{
+				FLegs -= 0.3f;
+				RLegs += 0.3f;
+				head -= 0.03f;
+				tail -= 0.03f;
+				if (FLegs <= -15.0f)
+					step = false;
+			}
+
+
+			dogPos.x -= 0.001;
+			dogPos.z += 0.001;
+		}
+		else {
+			dogAnim8 = 0;
+			dogPos.x = 0.0f;
+			dogPos.z = 0.0f;
+		}
+	}
 }
+	
+	
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)
 {
